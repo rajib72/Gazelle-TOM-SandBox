@@ -1,0 +1,169 @@
+<apex:page standardController="ChikPeaTOM__Quote__c" extensions="QuotePageController" sidebar="false" showHeader="false" applyBodyTag="false" standardStylesheets="true" applyHtmlTag="false">
+  <body>
+    <!-- Header -->
+    <div style="position: running(header);" name="header2">
+      <table style="width:100%;">
+        <tr>
+          <td style="width:50%;">
+            <div class="imageDiv">
+              <img src="https://gazelle--tomdev--c.sandbox.vf.force.com/resource/1682063515000/ACILogo?" />
+              <p style="color:#808080;font-size:10px;">Flexible colocation, network and voice services</p>
+            </div> 
+          </td>
+          <td style="width:50%;text-align:right;">
+            <div class="headingText">
+              <p style="color:#808080;font-size:40px;">QUOTE</p>
+            </div>
+          </td>
+        </tr>
+    </table>
+    </div>
+    <!-- footer -->
+    <div class="footer2" style="page-break-after:always;font-family:Arial, Helvetica, sans-serif;font-size:8pt;color:#808080;text-align:center;position: running(footer);">
+     <span id="pageNum2"></span> Accelerated Connections Inc. 155 Wellington St. W., Suite 3740, Toronto, ON, M5V 3H1. 866-814-1635. connections.ca
+    </div>
+
+
+
+    <!-- contact details -->
+    <div class="contact" style="font-size: 13px;line-height: 1;">
+      <table style="width:100%;">
+        <tr>
+          <td style="width:50%;">
+
+          </td>
+          <td style="width:50%;text-align:center;">
+            To
+          </td>
+        </tr>
+        <tr>
+          <td style="width:50%;">
+            Date: November 8, 2017
+          </td>
+          <td style="width:50%;text-align:right;">
+            Tolt Solutions (former IPASS)
+          </td>
+        </tr>
+        <tr>
+          <td style="width:50%;">
+            QUOTE # 00002271
+          </td>
+          <td style="width:50%;text-align:right;">
+            8000 Towers Crescent Drive, Ste.
+          </td>
+        </tr>
+        <tr>
+          <td style="width:50%;">
+            Expiration Date: December 8, 2017
+          </td>
+          <td style="width:50%;text-align:right;">
+            1350
+          </td>
+        </tr>
+        <tr>
+          <td style="width:50%;">
+
+          </td>
+          <td style="width:50%;text-align:right;">
+            Vienna, WA 22182
+          </td>
+        </tr>
+        <tr>
+          <td style="width:50%;">
+
+          </td>
+          <td style="width:50%;text-align:right;">
+            Account 1579
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!--  -->
+    <div style="padding-top:10px;font-size: 13px;">
+      <table border="0" style="width:100%;border-collapse:collapse;">
+        <tr align="center">
+          <td>Salesperson</td>
+          <td>Opportunity</td>
+          <td>Term</td>
+        </tr>
+        <tr align="center">
+          <td style="border:1px solid black;">Chantal Bermingham</td> 
+          <td style="border:1px solid black;">CK-TH-VH UPGRADE</td>
+          <td style="border:1px solid black;">12 Months</td>
+        </tr>
+      </table>
+    </div>
+    <!-- Item Table -->
+    <apex:pageBlock >
+
+    <apex:repeat value="{!premiseIdToQuoteLineMap}" var="mapKey">
+    <div class="Item-table" style="padding-top:8px;">
+      <table style="width:100%;font-size:13px;border-collapse:collapse;">
+        <tr style="background-color:rgb(17, 62, 131);color:white;">
+          <td colspan="8" style="padding:5px 0;">{!mapKey}</td>
+        </tr>
+        <tr>
+          <th style="width:5%;">Qty</th>
+          <th style="width:24%;">Item</th>
+          <th style="width:5%;"></th>
+          <th style="width:27%;">Description</th>
+          <th style="width:13%;">Unit Price</th>
+          <th style="width:13%;">Total NRC</th>
+          <th style="width:13%;">Total MRC</th>
+        </tr>
+        <apex:repeat value="{!premiseIdToQuoteLineMap[mapKey]}" var="a">
+          <tr>
+            <td>{!a.ChikPeaTOM__Qty__c}</td>
+            <td>{!a.ChikPeaTOM__Service_Plan__r.name}</td>
+            <td>ON</td>
+            <td>{!a.ChikPeaTOM__Service_Plan__r.ChikPeaTOM__Description__c}</td>
+            <td></td>
+            <td>${!a.ChikPeaTOM__NRC__c}</td>
+            <td>${!a.ChikPeaTOM__MRC__c}</td>
+          </tr>
+        </apex:repeat>
+        <tr>
+            <td colspan="4" style="border:none;"></td>
+            <td>Subtotal</td>
+            <td>${!NRCsumsByKey[mapKey]}</td>
+            <td>${!MRCsumsByKey[mapKey]}</td>
+        </tr>
+       </table>
+    </div> 
+    </apex:repeat>
+    <table style="width:100%;font-size:13px;border-collapse:collapse;">
+      <tr style="background-color:rgb(17, 62, 131);color:white;">
+          <th style="width:5%;"></th>
+          <th style="width:24%;"></th>
+          <th style="width:5%;"></th>
+          <th style="width:27%;"></th>
+          <th style="width:13%;">TOTAL:</th>
+          <th style="width:13%;">${!TotalNRC}</th>
+          <th style="width:13%;">${!TotalMRC}</th>
+      </tr>
+    </table>
+</apex:pageBlock>
+
+<div style="page-break-before: always;"></div>
+
+<div class="details">
+  <p>This is an order form for ordering Services from Accelerated Connections Inc. to be delivered to the undersigned customer. Terms used and not defined in this.
+    Order Form have the meanings given to them in the Master Terms and Conditions (the “Master Terms”). Once you and we sign this Order Form, this Order
+    Form together with the Master Terms, the Service Terms applicable to these Services and any other document(s) expressly incorporated into any of these
+    documents, become a legally binding agreement between us, dated the date set out above, or are incorporated effective on that date into the existing
+    agreement between us, if any (the “Agreement”). The Master Terms, Service Terms and other documents that are incorporated into them that are effective as
+    of the date of this Order Form can be viewed at www.connections.ca/terms.
+  </p>
+  <p>Prices do not include applicable taxes and shipping (unless otherwise indicated).</p>
+  <p>Prices valid for 30 days.</p>
+  <p>Initial Term set out in the Order Form per above and may be subject to Early Termination Fees, as set out in ACI Master Terms and Conditions.</p>
+  <p>Installation timeline varies based on services ordered and availability.</p>
+  <p>All speed upgrades constitute new installations.</p>
+</div>
+
+<div style="padding-top:10px;">
+  <p style="font-size:12px;"><b>{!accountName}</b></p>
+</div>
+
+  </body>
+</apex:page>
