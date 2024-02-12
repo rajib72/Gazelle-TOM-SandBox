@@ -161,7 +161,8 @@ public with sharing class QuoteAddProduct {
                     ChikPeaTOM__Child_Plan__r.ChikPeaTOM__MRC__c,ChikPeaTOM__Child_Plan__r.ChikPeaTOM__NRC__c,ChikPeaTOM__Qty__c,
                         ChikPeaTOM__Child_Plan__r.ChikPeaTOM__Description__c from ChikPeaTOM__Bundled_Plan__c 
                         where ChikPeaTOM__Parent_Plan__c =:parentPlanId limit 2000];
-        System.debug('#****bundle size='+bundle_list.size());                                        
+        System.debug('#****bundle size='+bundle_list.size()); 
+        System.debug('Bundled Plan:  '+bundle_list);                                       
         
         Set<Id> reqChildPlanId = new Set<Id>();    
         reqChildPlanId.add(parentPlanId);   
@@ -169,9 +170,9 @@ public with sharing class QuoteAddProduct {
         Set<Id> recChildPlanId = new Set<Id>();                                        
         for(ChikPeaTOM__Bundled_Plan__c bundle:bundle_list){
             if(bundle.ChikPeaTOM__Bundle_Type__c == 'Required')
-            reqChildPlanId.add(bundle.ChikPeaTOM__Child_Plan__c);
+                reqChildPlanId.add(bundle.ChikPeaTOM__Child_Plan__c);
             else if(bundle.ChikPeaTOM__Bundle_Type__c == 'Recommended')
-            recChildPlanId.add(bundle.ChikPeaTOM__Child_Plan__c);
+                recChildPlanId.add(bundle.ChikPeaTOM__Child_Plan__c);
         }
 
         List<ChikPeaTOM__Service_Plan__c> reqChildRecords = [Select Id,Name,ChikPeaTOM__Plan_Category__c,ChikPeaTOM__Service_Type__c, 
@@ -207,7 +208,8 @@ public with sharing class QuoteAddProduct {
             qlp.planType = 'Recommended';
             qlp.added = false;
             qlpList.add(qlp);
-        }  
+        }
+        System.debug('qlplist: '+qlpList);  
         return qlpList;
     }
     public static QuoteLinePlan createQuoteLinePlan(Id quoteId, ChikPeaTOM__Service_Plan__c plan){

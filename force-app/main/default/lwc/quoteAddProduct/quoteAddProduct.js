@@ -67,7 +67,9 @@ export default class quoteAddProduct extends LightningElement {
                             const json = {planId: rePlan.planId, mrc: rePlan.mrc, nrc: rePlan.nrc}
                             this.tempPlans.push(json)
                         }
+                        console.log('tobeAddedRecords:::> '+JSON.stringify(this.tobeAddedRecords));
                     }
+            
                 }
                 console.log('1 addProduct tempPlans= '+JSON.stringify(this.tempPlans, null, '\t'))
                 for(;i<result.length;i++){

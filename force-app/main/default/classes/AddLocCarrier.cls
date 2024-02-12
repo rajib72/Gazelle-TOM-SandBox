@@ -152,8 +152,12 @@ public with sharing class AddLocCarrier {
                     qlp.ChikPeaTOM__Primary__c = false;
                     qlpListUpdate.add(qlp);
                 }
+                System.debug('primary == true');
+                System.debug('qlpListUpdate'+qlpListUpdate.size());
             }
-            update qlpListUpdate;
+            // if(qlpListUpdate.size() > 0){
+            //     update qlpListUpdate;
+            // }
             
             for(ChikPeaTOM__Quote_Line__c quoteLine:quoteLines){
                 ChikPeaTOM__Quote_Line_Premise__c qlp = new ChikPeaTOM__Quote_Line_Premise__c(
@@ -164,6 +168,7 @@ public with sharing class AddLocCarrier {
                     quoteLine.ChikPeaTOM__Primary_Site__c = premiseId;
                 }
             }
+            System.debug('quoteLines'+quoteLines);
             insert qlpList;
             update quoteLines;
             
